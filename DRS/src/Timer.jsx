@@ -25,11 +25,16 @@ function Timer() {
       handleTime();
     });
 
+
     return () => {
       socket.off("startTimer");
       clearInterval(timerid);
     };
   }, []);
+
+  useEffect(()=>{
+    handleTime();
+  }, [])
 
   return (
     <div className="container">
