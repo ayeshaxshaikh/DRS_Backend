@@ -9,23 +9,34 @@ const socket = io('https://drs-frontend-1.onrender.com');
 
 function Timer() {
   const [timer, setTimer] = useState(15);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     socket.on('timerUpdate', (newTime) => {
       setTimer(newTime);
+      if (newTime === 0){
+        setIsHidden(true);
+      }
+    });
+
+    socket.on('resetTimer', () => {
+      setIsHidden(true);
     });
 
     socket.emit('startTimer');
 
     return () => {
-      socket.off('timerUpdate');  
+      socket.off('timerUpdate'); 
+      socket.off('resetTimer');  
     };
   }, []);
 
   return (
-    <div className='container'>
+    <div className={`container ${isHidden} ? 'hidden-background' : 'show-background'`}>
      
-      <video autoPlay muted loop id="background-video">
+      {!isHidden && (
+        <>
+          <video autoPlay muted loop id="background-video">
         <source src={background_video} type="video/mp4" />
       </video>
 
@@ -38,6 +49,9 @@ function Timer() {
           <p>{timer}</p>
         </div>
       </div>
+        </>
+      )}
+
     </div>
   );
 }
