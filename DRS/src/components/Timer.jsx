@@ -119,8 +119,7 @@ import io from 'socket.io-client';
 import './Timer.css';
 import background_video from '../assets/background-video.mp4';
 
-// const socket = io('https://drs-frontend-1.onrender.com');
-const socket = io('localhost:3000');
+const socket = io('https://drs-frontend-1.onrender.com');
 
 
 function Timer() {

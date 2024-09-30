@@ -40,8 +40,8 @@
 import React from "react";
 import { io } from "socket.io-client";
 
-// const socket = io('https://drs-frontend-1.onrender.com');
-const socket = io('localhost:3000');
+const socket = io('https://drs-frontend-1.onrender.com');
+
 
 
 function TimerControl() {
